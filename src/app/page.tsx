@@ -1,43 +1,33 @@
-import { Suspense } from "react"
-import { GlobalCommands } from "./global-commands"
+"use client"
 
-export default async function Page() {
+import { useRef } from "react"
+import Announcements from "./Announcements"
+import Description from "./Description"
+import HomeHeader from "./HomeHeader"
+
+export default function Page() {
+  const introVideo = useRef<HTMLVideoElement>(null!)
+  const bgVideo = useRef<HTMLDivElement>(null!)
+
   return (
-    <main className="container mx-auto px-3 py-6">
-      <section className="grid grid-cols-1 gap-2">
-        <h1 className="text-4xl font-bold tracking-tight lg:text-5xl">NextBot</h1>
-        <h2 className="text-xl tracking-tight text-slate-500">
-          A Discord bot template built with Next.js that runs in the edge runtime.
-        </h2>
-        <div className="flex gap-2">
-          <a
-            className="ring-offset-background focus-visible:ring-ring inline-flex h-10 w-fit items-center justify-center rounded-md bg-[#7289DA] px-4 py-2 text-sm font-medium text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-            href="https://discord.gg/NmXuqGgkb3"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Try it out
-          </a>
-          <a
-            className="ring-offset-background focus-visible:ring-ring inline-flex h-10 w-fit items-center justify-center rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-            href="https://github.com/jzxhuang/nextjs-discord-bot"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Github
-          </a>
+    <>
+      <div className="min-w-full h-screen relative">
+        <video className="home-intro" poster="/videos/vgdcIntro.webp" autoPlay muted playsInline ref={introVideo}>
+          <source src="/videos/vgdcWebMTest.hevc.mp4" type="video/mp4; codecs='hvc1'" />
+          <source src="/videos/vgdcWebMTest.mkv" type="video/mp4" />
+        </video>
+        <div ref={bgVideo}>
+          <video className="home-video-mobile md:hidden" poster="/videos/VGDCReelCutMobile.webp" autoPlay loop muted playsInline>
+            <source src="/videos/VGDCReelCutMobile.mp4" type="video/mp4" />
+          </video>
+          <video className="home-video hidden md:block" poster="/videos/VGDCReelCut.webp" autoPlay loop muted playsInline>
+            <source src="/videos/VGDCReelCut.mp4" type="video/mp4" />
+          </video>
         </div>
-      </section>
-
-      <section className="flex flex-col gap-2 pt-12">
-        <p className="font-semibold">
-          This is an example of an admin portal might look like. It leverages RSCs to fetch the Slash commands
-          associated with the Discord bot!
-        </p>
-        <Suspense fallback={null}>
-          <GlobalCommands />
-        </Suspense>
-      </section>
-    </main>
+        <HomeHeader />
+        {/* <Announcements />
+        <Description /> */}
+      </div>
+    </>
   )
 }

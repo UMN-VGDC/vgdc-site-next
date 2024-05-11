@@ -1,0 +1,78 @@
+.navbarGradient {
+  background: linear-gradient(269.87deg, rgba(11, 16, 22, 0.92) 53.4%, #1d1a45 106.76%);
+}
+
+.navbarItem {
+  text-decoration: none;
+  color: white;
+  min-height: 100%;
+  padding-inline: 40px;
+  display: flex;
+  align-items: center;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.navbarItem:hover {
+  cursor: pointer;
+  text-shadow: 0px 0px 20px #00feff;
+}
+
+.navbarItem::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 6px;
+  width: 0%;
+  background-color: var(--primary);
+  transition: ease-in-out 0.2s;
+}
+
+.navbarItem:hover::after {
+  width: 100%;
+}
+
+.navbarItem::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(-50%, 50%);
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  z-index: -1;
+  background-color: rgba(87, 140, 204, 0.438);
+  mix-blend-mode: color-dodge;
+  transition: cubic-bezier(0.28, 0.44, 0.2, 1.39) 0.15s;
+}
+
+.navbarItem:active::before {
+  width: 250%;
+  height: 330%;
+}
+
+.navSidebar {
+  background: linear-gradient(90deg, #1d1a45bf 0%, rgba(0, 0, 0, 0.877) 96%);
+}
+
+.dropShadow {
+  position: fixed;
+  top: var(--navHeight);
+  height: 30px;
+  width: 100%;
+  background: linear-gradient(0deg, rgba(11, 16, 22, 0) 0%, rgba(11, 16, 22, 1) 100%);
+  z-index: 10;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.discordGradient {
+  background: linear-gradient(#4bd5ff 30%, #2b40ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

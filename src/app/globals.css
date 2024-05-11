@@ -1,3 +1,88 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --bgPrimary: #252b35;
+  --bgSecondary: #0b1016;
+  --bgTertiary: #333d44;
+  --bgGradient: #1d1a45;
+
+  --primary: #3e56dd;
+  --secondary: #6652dd;
+  --tertiary: #d236be;
+
+  --shadow: #00feff;
+  --navHeight: 4.375rem;
+}
+
+html,
+body {
+  background-color: var(--bgPrimary);
+  margin: 0;
+  overflow-x: hidden;
+  color: white;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+.home-video {
+  position: relative;
+  right: 0;
+}
+
+.home-intro {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto;
+  width: 100%;
+  z-index: 50;
+  pointer-events: none;
+  object-fit: cover;
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .home-intro {
+    width: auto;
+    height: 100vh;
+  }
+}
+
+.home-video-mobile {
+  position: relative;
+  top: var(--navHeight);
+  width: 100vw;
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, black 17%);
+  mask-image: linear-gradient(to top, transparent 0%, black 17%);
+}
+
+h1.home-heading {
+  padding-left: 15vw;
+  top: 10vw;
+  font-size: 16vw;
+  position: absolute;
+  white-space: nowrap;
+  z-index: 2;
+  background: linear-gradient(#86fff8, #d9c6f2 50%, #ff2bea);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 1rem;
+  line-height: 18vw;
+}
+
+@media (min-width: 768px) {
+  h1.home-heading {
+    line-height: 8.5rem;
+    top: 5rem;
+    padding-left: 110px;
+    font-size: 7.5rem;
+  }
+}
