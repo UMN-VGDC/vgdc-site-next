@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import styles from "./styles.module.scss"
 
 const headerText: React.ReactNode[] = [
   <>
@@ -22,7 +23,7 @@ export default function HeaderText() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 1.4, duration:1 }}
-      className="home-heading font-header font-bold"
+      className={`${styles.homeHeading} font-header font-bold`}
     >
       {headerText.map((e, i) => {
         return (

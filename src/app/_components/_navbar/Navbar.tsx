@@ -8,7 +8,7 @@ import Triangles from "../../_icons/Triangles"
 import { exposedItems } from "./NavbarItems"
 import NavSidebar from "./NavSidebar"
 import {AnimatePresence} from "framer-motion"
-import styles from "./styles.module.css"
+import styles from "./styles.module.scss"
 
 export default function Navbar() {
   const [sidebarOpen, setSidebarOpen] = useState(false)

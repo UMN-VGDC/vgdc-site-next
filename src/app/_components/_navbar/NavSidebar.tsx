@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { exposedItems } from "./NavbarItems"
-import styles from "./styles.module.css"
+import styles from "./styles.module.scss"
 
 interface NavSidebar {
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>

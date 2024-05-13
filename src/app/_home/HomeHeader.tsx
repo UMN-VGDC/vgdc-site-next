@@ -1,10 +1,10 @@
 import Link from "next/link"
 import React from "react"
-import HeadingBackground from "./_components/HeadingBackground"
-import HeadingTextBG from "./_components/HeadingTextBG"
-import LandingButton from "./_components/LandingButton"
-import MobileHeadingBackground from "./_components/MobileHeadingBackground"
-import MobileHeadingTextBG from "./_components/MobileHeadingTextBG"
+import HeadingBackground from "../_components/HeadingBackground"
+import HeadingTextBG from "../_components/HeadingTextBG"
+import LandingButton from "../_components/LandingButton"
+import MobileHeadingBackground from "../_components/MobileHeadingBackground"
+import MobileHeadingTextBG from "../_components/MobileHeadingTextBG"
 import HeaderText from "./HeaderText"
 
 export default function HomeHeader() {

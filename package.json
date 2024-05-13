@@ -9,9 +9,10 @@
     "register-commands": "tsx ./scripts/register-commands"
   },
   "dependencies": {
-    "@next/font": "^14.2.3",
+    "@contentful/rich-text-react-renderer": "^15.19.6",
     "@t3-oss/env-nextjs": "^0.7.1",
     "autoprefixer": "^10.4.16",
+    "contentful": "^10.10.0",
     "discord-api-types": "^0.37.54",
     "dotenv": "^16.3.1",
     "framer-motion": "^11.1.9",
@@ -22,6 +23,7 @@
     "postcss": "^8.4.30",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sass": "^1.77.1",
     "tailwindcss": "^3.3.3",
     "tweetnacl": "^1.0.3",
     "zod": "^3.22.4"

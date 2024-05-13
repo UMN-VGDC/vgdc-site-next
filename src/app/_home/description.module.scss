@@ -1,0 +1,88 @@
+@import "../windowSizes.scss";
+
+.homeParagraphContainer {
+  @media (min-width: $medium) {
+    top: -10%;
+  }
+  @media (min-width: $large) {
+    background: linear-gradient(333deg, var(--bgSecondary) 10%, var(--bgGradient) 100%);
+  }
+  position: relative;
+  top: -25%;
+  background: linear-gradient(333deg, var(--bgSecondary) 50%, var(--bgGradient) 100%);
+  width: 100vw;
+  clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 94%);
+}
+
+.homeParagraph {
+  @media (min-width: $large) {
+    flex-direction: row-reverse;
+    justify-content: space-around;
+  }
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  right: 0;
+  line-height: 2em;
+  color: #808080;
+}
+
+.homeParagraph div.text {
+  @media (min-width: $small) {
+    padding: 10em 5em 4em 5em;
+  }
+  @media (min-width: $medium) {
+    padding: 5em 5em 4em 5em;
+  }
+  @media (min-width: $large) {
+    padding: 2em 3em 2em 2em;
+  }
+  @media (min-width: $xlarge) {
+    padding: 4em 6em 2em 4em;
+    font-size: 1.1rem;
+    line-height: 2em;
+  }
+  @media (min-width: $xxlarge) {
+    padding: 4em 6em 2em 4em;
+    font-size: 1.4rem;
+    line-height: 2em;
+  }
+  padding: 10em 3em 3em 3em;
+}
+
+.discordButton {
+  @media (min-width: 500px) {
+    width: fit-content;
+  }
+
+  display: flex;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: rgb(255, 255, 255);
+  background-color: var(--primary);
+  border-radius: 6px;
+  padding-block: 0.3rem;
+  padding-inline: 1.3rem;
+  margin-top:1rem;
+}
+
+.homeParagraph h2 {
+  @media (min-width: $small) {
+    font-size: 3rem;
+  }
+  font-size: 2rem;
+  color: #ffffff;
+  line-height: 1.1em;
+  margin-block: 1rem;
+}
+
+.homeParagraph picture {
+  @media (min-width: $large) {
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+    min-width: 60%;
+  }
+  clip-path: polygon(0 0, 100% 10%, 100% 100%, 0% 100%);
+  position: relative;
+  width: 100%;
+}
