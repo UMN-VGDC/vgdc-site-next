@@ -1,0 +1,136 @@
+form.basicForm {
+  width: 100%;
+  margin: 20px 0px 120px 0px;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: rgb(37, 37, 41);
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.911));
+
+  p,
+  li {
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    list-style-type: none;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: aqua;
+  }
+
+  input,
+  textarea {
+    margin: 5px 0px 20px 0px;
+    min-width: 100%;
+    height: 30px;
+    border-radius: 3px;
+    border: none;
+    color: rgb(2, 2, 2);
+    background-color: rgb(218, 218, 218);
+    padding: 5px 10px 5px 10px;
+  }
+
+  textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  input[type="file"] {
+    display: flex;
+    align-items: center;
+    margin: 10px 0px 10px 0px;
+    color: rgb(112, 112, 112);
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0px;
+    height: 50px;
+  }
+
+  input::file-selector-button {
+    padding: 7px 10px 5px 10px;
+    margin-right: 14px;
+    color: rgb(51, 51, 51);
+    border: none;
+    background-color: white;
+    transition: 0.2s;
+    border-radius: 2px;
+  }
+
+  input::file-selector-button:hover {
+    cursor: pointer;
+    background-color: rgb(197, 197, 197);
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.548));
+  }
+
+  input:focus,
+  textarea:focus {
+    outline-width: 0;
+  }
+
+  label {
+    font-size: 1.2rem;
+    color: white;
+    span {
+      margin-left: 10px;
+      opacity: 0.3;
+      display: inline-block;
+    }
+  }
+
+  .submitButton,
+  .greyedOut {
+    background-color: var(--primary);
+    color: white;
+    font-size: 16px;
+    height: 50px;
+    transition: 0.2s;
+    &:hover {
+      background-color: #3245b1;
+      cursor: pointer;
+    }
+  }
+
+  .greyedOut {
+    background-color: gray;
+    pointer-events: none;
+  }
+
+  .loaderContainer {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    div {
+      border: 12px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 12px solid var(--primary);
+      width: 80px;
+      height: 80px;
+      -webkit-animation: spin 2s linear infinite; /* Safari */
+      animation: spin 2s linear infinite;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}
