@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { exposedItems } from "./NavbarItems";
@@ -14,9 +15,9 @@ export default function NavDropdown({ setSidebarOpen }: NavDropdown) {
       animate={{ height: "100vh", opacity: 1 }}
       exit={{ height: 0, opacity: 0.5 }}
       onClick={() => setSidebarOpen(false)}
-      className={`pointer-events-none fixed backdrop-blur-md right-0 top-navbar z-20 w-screen overflow-hidden bg-gradient-to-b from-[#1d1a45bf] to-[#000000b9] to-95%`}
+      className={`pointer-events-none fixed right-0 top-navbar z-20 w-screen overflow-hidden bg-gradient-to-b from-[#1d1a45bf] to-[#000000b9] to-95% backdrop-blur-md`}
     >
-      <ul className="pointer-events-auto mx-[2rem] list-none pt-6 h-full">
+      <ul className="pointer-events-auto mx-[2rem] h-full list-none pt-6">
         <DiscordNavItem />
         <NavbarItems />
       </ul>
