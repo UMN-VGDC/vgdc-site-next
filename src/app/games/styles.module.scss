@@ -1,0 +1,109 @@
+@import "../_components/windowSizes.scss";
+
+.imgContainer {
+  @media (min-width: $medium) {
+    padding-inline: 1.5em;
+  }
+  @media (min-width: $large) {
+    padding-inline: 3em;
+  }
+  width: 100%;
+  display: grid;
+  gap: 1.4em;
+  row-gap: 3em;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-rows: 300px;
+  overflow-y: hidden;
+  padding-inline: 1em;
+  padding-top: 7em;
+}
+
+.thumbnailImage {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: cubic-bezier(0, 0.75, 0.58, 1) 0.4s;
+  pointer-events: none;
+}
+
+.panel figcaption {
+  padding: 1em 4em 0em 1em;
+  position: relative;
+  width: 100%;
+  color: white;
+  height: 2.3em;
+  line-height: 1.5em;
+  letter-spacing: 1px;
+  transition: ease-in-out 0.2s;
+  &::after,
+  &::before {
+    box-sizing: border-box;
+    content: "";
+    position: absolute;
+    top: -1.3em;
+    left: 0;
+    height: 200%;
+    width: 2px;
+    z-index: -2;
+    background: linear-gradient(0deg, rgba(11, 16, 22, 0) 0%, var(--bgTertiary) 50%);
+  }
+  &::before {
+    left: auto;
+    right: 0;
+  }
+}
+
+.panel {
+  margin: 0;
+  border-radius: 0.5rem;
+  position: relative;
+  filter: drop-shadow(0 0 0.4rem black);
+  background: linear-gradient(0deg, rgba(11, 16, 22, 0) 0%, var(--bgSecondary) 30%);
+  user-select: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:hover .thumbnailImage {
+    transform: scale(1.2);
+  }
+
+  &:hover figcaption {
+    text-shadow: 0px 0px 20px #00feff;
+    filter: drop-shadow(0 0 1.3rem rgb(14, 66, 88));
+  }
+
+}
+
+.selected {
+  filter: drop-shadow(0 0 0.4rem var(--primary));
+}
+
+.games-background-triangles {
+  pointer-events: none;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 80vw;
+  opacity: 0.4;
+  mix-blend-mode: screen;
+}
+
+.new-tag {
+  font-size: 0.8rem;
+  color: rgb(255, 252, 214);
+  text-shadow: 0px 0px 10px #00567e;
+  letter-spacing: 2px;
+  position: absolute;
+  top: -5px;
+  left: -13px;
+  background-color: rgb(255, 115, 0);
+  padding-block: 0.3em;
+  padding-inline: 1em;
+  clip-path: polygon(90% 0%, 100% 50%, 90% 100%, 0% 100%, 10% 50%, 0% 0%);
+  span {
+    display: inline-block;
+  }
+}

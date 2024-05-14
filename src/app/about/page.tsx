@@ -1,5 +1,5 @@
 import ContentfulData from "../_components/ContentfulData";
-import styles from "../basicPage.module.scss";
+import styles from "../_components/basicPage.module.scss";
 
 export default async function About() {
   return (

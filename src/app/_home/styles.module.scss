@@ -1,4 +1,4 @@
-@import "../windowSizes.scss";
+@import "../_components/windowSizes.scss";
 
 .homeIntro {
   @media (max-aspect-ratio: 16/9) {
@@ -102,6 +102,7 @@ h1.homeHeading {
   flex-direction: column;
   z-index: 1;
   transition: 0.3s ease-in-out;
+  backdrop-filter: blur(8px);
 }
 
 .announcementListCollapsed {

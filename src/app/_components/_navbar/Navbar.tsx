@@ -6,7 +6,7 @@ import { useState } from "react"
 import NewWindowIcon from "../../_icons/NewWindowIcon"
 import Triangles from "../../_icons/Triangles"
 import { exposedItems } from "./NavbarItems"
-import NavSidebar from "./NavSidebar"
+import NavSidebar from "./NavDropdown"
 import {AnimatePresence} from "framer-motion"
 import styles from "./styles.module.scss"
 
@@ -30,7 +30,7 @@ export default function Navbar() {
             <div className="hidden text-[0.9rem] leading-[1.2rem] opacity-40 xl:block">
               University of Minnesota <br /> Video Game Development Club
             </div>
-            <Triangles className="absolute left-[8.75rem] top-[-1.875rem] z-[-1] w-[8.125rem] mix-blend-screen" />
+            <Triangles className="absolute left-[8.75rem] top-[-1.875rem] z-[-1] w-[170px] opacity-60 mix-blend-screen" />
           </Link>
           <div className="flex w-full justify-end">
             <ul className="font-header m-0 flex min-h-full list-none p-0">

@@ -2,7 +2,7 @@ type Triangles = React.HTMLAttributes<SVGElement>
 
 export default function Triangles({ ...props }: Triangles) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="175.55" height="173.75" viewBox="0 0 175.55 173.75" {...props}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175.55 173.75" {...props}>
       <g>
         <g fill="#0b1016">
           <path d="M10.36 121.04L.54 138.05c-1.52 2.64.38 5.93 3.43 5.93h19.64c3.04 0 4.95-3.3 3.43-5.93l-9.82-17.01c-1.52-2.64-5.33-2.64-6.85 0zM60.2 121.04l-9.82 17.01c-1.52 2.64.38 5.93 3.43 5.93h19.64c3.04 0 4.95-3.3 3.43-5.93l-9.82-17.01c-1.52-2.64-5.33-2.64-6.85 0z"></path>

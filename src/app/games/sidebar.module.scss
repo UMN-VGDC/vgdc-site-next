@@ -1,0 +1,108 @@
+@import "../_components/windowSizes.scss";
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 40px;
+  width: 80px;
+  z-index: 4;
+  border: none;
+  border-radius: 10px;
+  color: #ffffffcb;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.1em;
+  background: linear-gradient(0deg, var(--primary) 0%, var(--secondary) 100%);
+  transition: 0.1s;
+  &:active {
+    filter: brightness(0.8);
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: var(--bgSecondary);
+  user-select: none;
+
+  &:hover svg {
+    filter: drop-shadow(0 0 0.4rem #00feff);
+  }
+}
+
+.buttons > svg {
+  transition: 0.2s;
+  transform: scale(0.5);
+}
+
+.blurredBackground {
+  width: 100%;
+  height: 420px;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  background-size: cover;
+  overflow-x: hidden;
+  transform: scale(1.5);
+  filter: blur(3rem);
+}
+
+.playButtonBackground {
+  width: 700px;
+  height: 200px;
+  background: linear-gradient(0deg, var(--bgGradient) 70%, var(--bgSecondary) 100%);
+  position: absolute;
+  right: -740px;
+  transform: translate(-50%, -50%) rotate(-65deg);
+  top: 50%;
+}
+
+.playButtonLink,
+.playButtonDisabled {
+  @media (min-width: $large) {
+    right: -10px;
+    height: 85px;
+    width: 85px;
+  }
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 65px;
+  width: 65px;
+  background: linear-gradient(132deg, var(--tertiary) 0%, var(--secondary) 100%);
+  border-radius: 50%;
+  font-size: 0;
+  pointer-events: all;
+  transition: 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  * {
+    @media (min-width: $large) {
+      height: 85px;
+      width: 85px;
+    }
+    transition: 0.3s;
+    height: 65px;
+    width: 65px;
+  }
+}
+
+.playButtonLink {
+  &:hover {
+    cursor: pointer;
+    transform: translate(-50%, -63%);
+    filter: drop-shadow(0 10px 0px rgb(85, 28, 122));
+  }
+  &:active {
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    filter: none;
+  }
+  &:hover * {
+    filter: drop-shadow(0 0 7px #00ffff59);
+  }
+}
