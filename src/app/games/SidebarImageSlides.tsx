@@ -79,7 +79,7 @@ export default function SidebarImageSlides({ images }: SidebarImageSlides) {
               custom={direction}
               transition={{ duration: 0.3, ease: "backOut" }}
             >
-              <Image src={e.src} width={500} height={250} alt="game screenshot" className="h-[250px] w-auto" />
+              <Image src={e.src} width={500} height={250} alt="game screenshot" className="h-[250px] w-auto object-cover" />
             </motion.div>
           );
         })}

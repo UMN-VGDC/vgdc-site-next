@@ -35,7 +35,7 @@ function NavbarItems() {
         key={i}
         className={`text-end font-header font-bold ${e.exposed ? "lg:hidden" : ""}`}
       >
-        <Link href={e.href} className="text-[9vw] leading-[5rem] md:text-[4rem]">
+        <Link href={e.href} className="text-[9vw] leading-[4rem] md:leading-[5rem] md:text-[4rem]">
           {e.label}
         </Link>
       </motion.li>

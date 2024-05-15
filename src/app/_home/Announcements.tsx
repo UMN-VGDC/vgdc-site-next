@@ -1,11 +1,12 @@
-"use client"
-import React, { useRef, useState } from "react"
-import styles from "./styles.module.scss"
+"use client";
+
+import React, { useRef, useState } from "react";
+import styles from "./styles.module.scss";
 
 export default function Announcements({ children }: { children: React.ReactNode }) {
-  const [isExpanded, setIsExpanded] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null!)
-  const listRef = useRef<HTMLDivElement>(null!)
+  const [isExpanded, setIsExpanded] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null!);
+  const listRef = useRef<HTMLDivElement>(null!);
 
   return (
     <aside
@@ -19,44 +20,40 @@ export default function Announcements({ children }: { children: React.ReactNode 
         <button
           className="noSelect absolute bottom-4 z-[1] flex items-center font-light opacity-70 transition-opacity hover:opacity-100 md:hidden xl:flex"
           onClick={() => {
-            setIsExpanded(!isExpanded)
+            setIsExpanded(!isExpanded);
             if (isExpanded) {
-              listRef.current.scrollTo(0, 0)
-              return
+              listRef.current.scrollTo(0, 0);
+              return;
             }
             setTimeout(() => {
               containerRef.current.scrollIntoView({
                 block: window.innerWidth <= 768 ? "center" : "end",
                 inline: "nearest",
-              })
-            }, 200)
+              });
+            }, 200);
           }}
         >
-          <ExpandArrow />
-          <div>Read More</div>
+          <ExpandArrow
+            className={`className="mb-[2px]] w-auto" mr-2 h-2 transition-transform ${isExpanded ? "-rotate-90" : ""}`}
+          />
+          <div>{isExpanded ? "Collapse" : "Read More"}</div>
         </button>
       </div>
       <div className={isExpanded ? styles.announcementListExpanded : styles.announcementListCollapsed} ref={listRef}>
         {children}
       </div>
     </aside>
-  )
+  );
 }
 
-function ExpandArrow() {
+type ExpandArrow = React.HTMLAttributes<SVGElement>;
+function ExpandArrow({ ...props }: ExpandArrow) {
   return (
-    <svg
-      className="mb-[2px]] mr-2 h-2 w-auto"
-      width="34"
-      height="38"
-      viewBox="0 0 34 38"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="34" height="38" viewBox="0 0 34 38" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         d="M32 15.5359C34.6667 17.0755 34.6667 20.9245 32 22.4641L6.5 37.1865C3.83333 38.7261 0.499998 36.8016 0.499998 33.7224L0.5 4.27757C0.5 1.19837 3.83333 -0.726135 6.5 0.813465L32 15.5359Z"
         fill="white"
       />
     </svg>
-  )
+  );
 }
