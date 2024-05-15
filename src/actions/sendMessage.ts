@@ -1,9 +1,10 @@
 "use server";
 
 import { ContactData } from "@/app/contact/FormWrapper";
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from "@discordjs/builders";
 import { REST } from "@discordjs/rest";
 import { ButtonStyle, Routes } from "discord-api-types/v10";
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from "@discordjs/builders"
+import { NextResponse } from "next/server";
 import { ButtonId } from "./buttonId";
 
 const ReplyButton = new ButtonBuilder()
@@ -36,7 +37,9 @@ export default async function sendMessage(data: ContactData) {
         components: [row],
       },
     });
+    return { status: 200 };
   } catch (error) {
     console.error(error);
+    return { status: 500 };
   }
 }
