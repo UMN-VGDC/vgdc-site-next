@@ -19,7 +19,11 @@ export default function NavContextProvider({ children }: { children: React.React
 
   return (
     <NavContext.Provider value={{ sidebarOpen, setSidebarOpen }}>
-      <nav>
+      <nav
+        onClick={() => {
+          if (sidebarOpen) setSidebarOpen(false);
+        }}
+      >
         <AnimatePresence>{sidebarOpen && <NavDropdown setSidebarOpen={setSidebarOpen} />}</AnimatePresence>
         {children}
       </nav>

@@ -16,10 +16,11 @@ export default function MultiFileInput() {
   return (
     <div className="text-[1.2rem] text-white">
       <div className="font-header">Additional Media</div>
-      {media.map((e, i) => {
+      {media.map((_e, i) => {
         return (
           <AddBox
             mediaId={i}
+            key={i}
             changeEvent={handleImageUpload}
             addCallback={() => {
               if (media.length >= 3) return;

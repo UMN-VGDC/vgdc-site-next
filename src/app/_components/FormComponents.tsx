@@ -10,7 +10,7 @@ export function FormFieldText({ label, isRequired, ...props }: FormFieldText) {
         {label}
         {isRequired && <span>*</span>}
       </label>
-      <input type="text" required={isRequired} id={label} name={label} {...props}></input>
+      <input type="text" required={isRequired} id={label} name={label.toLowerCase()} {...props}></input>
     </div>
   );
 }
@@ -27,7 +27,7 @@ export function FormFieldTextarea({ label, isRequired, ...props }: FormFieldText
         {label}
         {isRequired && <span>*</span>}
       </label>
-      <textarea id={label} name={label} required={isRequired} {...props}></textarea>
+      <textarea id={label} name={label.toLowerCase()} required={isRequired} {...props}></textarea>
     </div>
   );
 }
