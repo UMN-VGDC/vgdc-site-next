@@ -140,6 +140,10 @@ export async function POST(request: Request) {
     const embed = interaction.message.embeds[0];
 
     const success = (embed: APIEmbed) => {
+      setTimeout(() => {
+        revalidateTag("games")
+      }, 5000);
+
       return NextResponse.json({
         type: InteractionResponseType.UpdateMessage,
         data: { content: `<@${interaction.member?.user?.id}>`, embeds: [embed], components: [] },
