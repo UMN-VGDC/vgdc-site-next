@@ -163,20 +163,22 @@ export async function POST(request: Request) {
         embed.footer!.icon_url = "https://i.imgur.com/slN10y7.png";
 
         const data = { ...embed, spreadsheet: "addGames" };
-        const response = await fetch(process.env.SPREADSHEET_ENDPOINT_URL!, {
-          method: "POST",
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8",
-          },
-          body: JSON.stringify(data),
-        });
-        
-        if (response.status != 200) {
-          return new NextResponse("an error occurred", { status: response.status });
+        try {
+          await fetch(process.env.SPREADSHEET_ENDPOINT_URL!, {
+            method: "POST",
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8",
+            },
+            body: JSON.stringify(data),
+          });
+
+          return success(embed);
+
+        } catch (err) {
+          return new NextResponse("an error occurred", { status: 500 });
         }
 
-        revalidateTag("games")
-        return success(embed);
+
       case ButtonId.GameDecline:
         embed.footer!.text = `Game declined by ${interaction.member?.user?.global_name}`;
         embed.color = 15548997;
