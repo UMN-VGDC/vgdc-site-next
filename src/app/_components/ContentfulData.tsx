@@ -53,5 +53,7 @@ export default async function ContentfulData({ contentType }: { contentType: Con
       ),
     },
   };
+
+  if (contentType === 'blogPost') return content;
   return <>{documentToReactComponents(content, options)}</>;
 }
