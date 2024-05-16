@@ -20,7 +20,7 @@ export default async function GetGameData() {
 
   const games: GameData[] = [];
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, {next: {tags: ["games"]}});
     const result = await res.json();
     for (let i = 1; i < result.values[1].length; i++) {
       const r = result.values;

@@ -12,7 +12,7 @@ export default function SubmitGames() {
           <ThumbnailUpload />
           <FormFieldText label="Build Link" placeholder="Optional, but highly encouraged" />
           <FormFieldTextarea label="Description" placeholder="Enter your game description. Optional" />
-          <FormFieldTextarea label="Credits" placeholder="Who worked on your game?. Optional" />
+          <FormFieldTextarea label="Credits" placeholder="Who worked on your game? Optional" />
           <MultiFileInput />
           <div className="flex w-full flex-col md:flex-row md:gap-5">
             <FormFieldText label="Date" placeholder="Fall 2022, Winter Game Jam 2023" />

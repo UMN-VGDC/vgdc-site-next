@@ -1,6 +1,7 @@
-"use client"
+"use client";
+
 import { motion } from "framer-motion";
-import React from "react";
+import styles from "./styles.module.scss";
 
 export default function NewTag({ date }: { date: string }) {
   const handleLetterAnim = (text: string) => {
@@ -29,10 +30,10 @@ export default function NewTag({ date }: { date: string }) {
       );
     });
   };
-  
+
   const parsedDate = Date.parse(date);
   const monthInMilliseconds = 2629746000;
   if (Date.now() - monthInMilliseconds < parsedDate) {
-    return <div className="new-tag">{handleLetterAnim("NEW!")}</div>;
+    return <div className={`${styles.newTag} font-header`}>{handleLetterAnim("NEW!")}</div>;
   }
 }

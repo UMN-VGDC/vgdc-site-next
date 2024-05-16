@@ -45,7 +45,14 @@ export default function FormFieldFile({ label, isRequired, changeEvent, ...props
         {label}
         {isRequired && <span>*</span>}
       </label>
-      <input type="file" id={label} required={isRequired} onChange={changeEvent} {...props}></input>
+      <input
+        type="file"
+        id={label}
+        required={isRequired}
+        name={label.toLowerCase()}
+        onChange={changeEvent}
+        {...props}
+      ></input>
     </div>
   );
 }

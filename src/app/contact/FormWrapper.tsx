@@ -1,10 +1,9 @@
 "use client";
 
 import sendMessage from "@/actions/sendMessage";
-import { useEffect, useState } from "react";
-import { useFormStatus } from "react-dom";
+import { useState } from "react";
 import styles from "../_components/form.module.scss";
-import Loader from "../_components/Loader";
+import SubmitButton from "../_components/SubmitButton";
 
 export type ContactData = {
   subject: string;
@@ -24,30 +23,7 @@ export default function FormWrapper({ children }: { children: React.ReactNode })
   return (
     <form className={styles.basicForm} action={handleFormSubmit}>
       {children}
-      <SubmitButton submitStatus={submitStatus} />
+      <SubmitButton submitStatus={submitStatus} successMessage="Message sent!" />
     </form>
-  );
-}
-
-function SubmitButton({ submitStatus }: { submitStatus: number | undefined }) {
-  const { pending } = useFormStatus();
-
-  return (
-    <>
-      <input
-        className={`${pending || submitStatus === 200 ? styles.greyedOut : styles.submitButton} font-header`}
-        type="submit"
-        disabled={pending || submitStatus === 200}
-      ></input>
-      <div
-        className={`flex w-full overflow-hidden items-center justify-center transition-all ${
-          pending || submitStatus ? "mt-4 h-12" : "mt-0 h-0"
-        }`}
-      >
-        {pending && <Loader />}
-        {!pending && submitStatus === 200 && "Message sent!"}
-        {!pending && submitStatus === 500 && "An error occurred"}
-      </div>
-    </>
   );
 }

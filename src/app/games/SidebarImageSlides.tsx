@@ -32,6 +32,7 @@ const variants = {
 
 export default function SidebarImageSlides({ images }: SidebarImageSlides) {
   const media = images
+    .filter((e) => e !== "---")
     .map((e, i) => {
       return {
         src: e,
@@ -79,7 +80,13 @@ export default function SidebarImageSlides({ images }: SidebarImageSlides) {
               custom={direction}
               transition={{ duration: 0.3, ease: "backOut" }}
             >
-              <Image src={e.src} width={500} height={250} alt="game screenshot" className="h-[250px] w-auto object-cover" />
+              <Image
+                src={e.src}
+                width={500}
+                height={250}
+                alt="game screenshot"
+                className="h-[250px] w-auto object-cover"
+              />
             </motion.div>
           );
         })}

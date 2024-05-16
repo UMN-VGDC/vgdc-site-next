@@ -3,6 +3,7 @@ import { commands, RandomPicType } from "@/commands";
 import { verifyInteractionRequest } from "@/discord/verify-incoming-request";
 import { env } from "@/env.mjs";
 import {
+  APIEmbed,
   APIInteractionDataOptionBase,
   ApplicationCommandOptionType,
   InteractionResponseType,
@@ -11,6 +12,7 @@ import {
 } from "discord-api-types/v10";
 import { NextResponse } from "next/server";
 import { getRandomPic } from "./random-pic";
+import { revalidateTag } from "next/cache";
 
 /**
  * Use edge runtime which is faster, cheaper, and has no cold-boot.
@@ -136,20 +138,52 @@ export async function POST(request: Request) {
 
   if (interaction.type === InteractionType.MessageComponent && interaction.message) {
     const embed = interaction.message.embeds[0];
-    if (interaction.data!.custom_id === ButtonId.ContactReply) {
-      embed.footer!.text = `Replied by ${interaction.member?.user?.global_name}`;
-      embed.color = 5763719;
-      embed.footer!.icon_url = "https://i.imgur.com/slN10y7.png";
-    } else if (interaction.data!.custom_id === ButtonId.ContactSpam) {
-      embed.footer!.text = `Marked as spam by ${interaction.member?.user?.global_name}`;
-      embed.color = 15548997;
-      embed.footer!.icon_url = "https://i.imgur.com/ouFkKRh.png";
-    }
 
-    return NextResponse.json({
-      type: InteractionResponseType.UpdateMessage,
-      data: { content: `<@${interaction.member?.user?.id}>`, embeds: [embed], components: [] },
-    });
+    const success = (embed: APIEmbed) => {
+      return NextResponse.json({
+        type: InteractionResponseType.UpdateMessage,
+        data: { content: `<@${interaction.member?.user?.id}>`, embeds: [embed], components: [] },
+      });
+    };
+
+    switch (interaction.data!.custom_id) {
+      case ButtonId.ContactReply:
+        embed.footer!.text = `Replied by ${interaction.member?.user?.global_name}`;
+        embed.color = 5763719;
+        embed.footer!.icon_url = "https://i.imgur.com/slN10y7.png";
+        return success(embed);
+      case ButtonId.ContactSpam:
+        embed.footer!.text = `Marked as spam by ${interaction.member?.user?.global_name}`;
+        embed.color = 15548997;
+        embed.footer!.icon_url = "https://i.imgur.com/ouFkKRh.png";
+        return success(embed);
+      case ButtonId.GameApprove:
+        embed.footer!.text = `Game approved by ${interaction.member?.user?.global_name}`;
+        embed.color = 5763719;
+        embed.footer!.icon_url = "https://i.imgur.com/slN10y7.png";
+
+        const data = { ...embed, spreadsheet: "addGames" };
+        const response = await fetch(process.env.SPREADSHEET_ENDPOINT_URL!, {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
+          body: JSON.stringify(data),
+        });
+        
+        if (response.status != 200) {
+          return new NextResponse("an error occurred", { status: response.status });
+        }
+
+        revalidateTag("games")
+        return success(embed);
+      case ButtonId.GameDecline:
+        embed.footer!.text = `Game declined by ${interaction.member?.user?.global_name}`;
+        embed.color = 15548997;
+        embed.footer!.icon_url = "https://i.imgur.com/ouFkKRh.png";
+        return success(embed);
+      default:
+    }
   }
 
   return new NextResponse("Unknown command", { status: 400 });

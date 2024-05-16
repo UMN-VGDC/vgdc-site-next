@@ -7,10 +7,10 @@ export default function ContactUs() {
       <div className="w-screen px-8 md:w-[768px]">
         <h2 className="w-full font-header text-4xl text-white">Contact Us</h2>
         <FormWrapper>
-          <FormFieldText label="Subject" />
-          <FormFieldText label="Name" />
-          <FormFieldTextarea label="Message" placeholder="Enter message" />
-          <FormFieldText label="Email" />
+          <FormFieldText label="Subject" isRequired />
+          <FormFieldText label="Name" isRequired/>
+          <FormFieldTextarea label="Message" placeholder="Enter message" isRequired />
+          <FormFieldText label="Email" isRequired/>
         </FormWrapper>
       </div>
     </main>

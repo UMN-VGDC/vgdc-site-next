@@ -1,38 +1,23 @@
 "use client";
 
+import sendGame from "@/actions/sendGame";
 import { useState } from "react";
 import styles from "../_components/form.module.scss";
 import FormFieldFile from "../_components/FormComponents";
-
-type GameFormData = {
-    title: string;
-    thumbnail: File | string;
-    buildLink: string;
-    description: string;
-    credits: string;
-    media0: File | string;
-    media1: File | string;
-    media2: File | string;
-    date: string;
-    themes: string;
-    email: string;
-}
+import SubmitButton from "../_components/SubmitButton";
 
 export default function FormWrapper({ children }: { children: React.ReactNode }) {
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<number>();
 
-  const handleFormSubmit = (formData: FormData) => {
-    const data = Object.fromEntries(formData) as GameFormData;
-    console.log(data.media2)
+  const handleFormSubmit = async (formData: FormData) => {
+    const response = await sendGame(formData);
+    setSubmitStatus(response.status);
   };
-  
+
   return (
-    <form
-      className={styles.basicForm}
-      action={handleFormSubmit}
-    >
+    <form className={styles.basicForm} action={handleFormSubmit}>
       {children}
-      <input className={`${isSubmitted ? styles.greyedOut : styles.submitButton} font-header`} type="submit"></input>
+      <SubmitButton submitStatus={submitStatus} successMessage="Game sent!" />
     </form>
   );
 }
