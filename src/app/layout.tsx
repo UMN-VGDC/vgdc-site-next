@@ -42,6 +42,28 @@ export const metadata: Metadata = {
   description:
     "We are actors, artists, designers, musicians, programmers, writers, and more! All skill levels are welcome, and we're always willing to teach.",
   authors: [{ name: "Andrew Cao" }],
+  twitter: {
+    images: [
+      {
+        url: "/images/site-screenshot.png"
+      }
+    ],
+    card: "summary_large_image",
+    title: "Video Game Development Club",
+    description: "We are actors, artists, designers, musicians, programmers, writers, and more! All skill levels are welcome, and we're always willing to teach.",
+  },
+  openGraph: {
+    images: [
+      {
+        url: "/images/site-screenshot.png"
+      }
+    ],
+    title: "Video Game Development Club",
+    description: "We are actors, artists, designers, musicians, programmers, writers, and more! All skill levels are welcome, and we're always willing to teach.",
+    url: "https://vgdc.club/",
+    type: "website"
+  }
+  
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
