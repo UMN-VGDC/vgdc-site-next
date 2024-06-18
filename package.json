@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
-    "build": "next build",
+    "build": "next build && tsx ./scripts/register-commands",
     "start": "next start",
     "type-check": "tsc",
     "register-commands": "tsx ./scripts/register-commands"
