@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   twitter: {
     images: [
       {
-        url: "/images/site-screenshot.png"
+        url: "https://vgdc.club/images/site-screenshot.png"
       }
     ],
     card: "summary_large_image",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [
       {
-        url: "/images/site-screenshot.png"
+        url: "https://vgdc.club/images/site-screenshot.png"
       }
     ],
     title: "Video Game Development Club",
