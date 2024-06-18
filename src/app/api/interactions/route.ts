@@ -1,18 +1,18 @@
 import { ButtonId } from "@/actions/buttonId";
-import { commands, RandomPicType } from "@/commands";
+import { commands } from "@/commands";
 import { verifyInteractionRequest } from "@/discord/verify-incoming-request";
 import { env } from "@/env.mjs";
 import {
+  APIApplicationCommandInteractionDataBasicOption,
   APIEmbed,
-  APIInteractionDataOptionBase,
-  ApplicationCommandOptionType,
   InteractionResponseType,
   InteractionType,
   MessageFlags,
 } from "discord-api-types/v10";
 import { NextResponse } from "next/server";
-import { getRandomPic } from "./random-pic";
-import { revalidateTag } from "next/cache";
+import { announcementModal } from "./announcementModal";
+import { sendGameToSpreadsheet } from "./sendGameToSpreadsheet";
+import { sendAnnouncement } from "./sendAnnouncement";
 
 /**
  * Use edge runtime which is faster, cheaper, and has no cold-boot.
@@ -23,10 +23,6 @@ import { revalidateTag } from "next/cache";
 export const runtime = "edge";
 
 const ROOT_URL = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : env.ROOT_URL;
-
-function capitalizeFirstLetter(s: string) {
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
 
 /**
  * Handle Discord interactions. Discord will send interactions to this endpoint.
@@ -64,75 +60,30 @@ export async function POST(request: Request) {
           },
         });
 
-      case commands.pokemon.name:
-        if (!interaction.data.options || interaction.data.options?.length < 1) {
-          return NextResponse.json({
-            type: InteractionResponseType.ChannelMessageWithSource,
-            data: {
-              content: "Oops! Please enter a Pokemon name or Pokedex number.",
-              flags: MessageFlags.Ephemeral,
-            },
-          });
-        }
-
-        const option = interaction.data.options[0];
-        // @ts-ignore
-        const idOrName = String(option.value).toLowerCase();
-
-        try {
-          const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${idOrName}`).then((res) => {
-            return res.json();
-          });
-          const types = pokemon.types.reduce(
-            (prev: string[], curr: { type: { name: string } }) => [...prev, capitalizeFirstLetter(curr.type.name)],
-            []
-          );
-
-          return NextResponse.json({
-            type: InteractionResponseType.ChannelMessageWithSource,
-            data: {
-              embeds: [
-                {
-                  title: capitalizeFirstLetter(pokemon.name),
-                  image: {
-                    url: `${ROOT_URL}/api/pokemon/${idOrName}`,
-                  },
-                  fields: [
-                    {
-                      name: "Pokedex",
-                      value: `#${String(pokemon.id).padStart(3, "0")}`,
-                    },
-                    {
-                      name: "Type",
-                      value: types.join("/"),
-                    },
-                  ],
-                },
-              ],
-            },
-          });
-        } catch (error) {
-          throw new Error("Something went wrong :(");
-        }
-
-      case commands.randompic.name:
+      case commands.announcement.name:
         const { options } = interaction.data;
         if (!options) {
           return new NextResponse("Invalid request", { status: 400 });
         }
-
-        const { value } = options[0] as APIInteractionDataOptionBase<
-          ApplicationCommandOptionType.String,
-          RandomPicType
-        >;
-        const embed = await getRandomPic(value);
         return NextResponse.json({
-          type: InteractionResponseType.ChannelMessageWithSource,
-          data: { embeds: [embed] },
+          type: InteractionResponseType.Modal,
+          data: announcementModal(options as APIApplicationCommandInteractionDataBasicOption[]),
         });
-
       default:
       // Pass through, return error at end of function
+    }
+  }
+
+  if (interaction.type === InteractionType.ModalSubmit) {
+    //@ts-ignore
+    const params = JSON.parse(interaction.data.custom_id)
+
+    if (params.type === "announcement") {
+      sendAnnouncement(interaction, params.category, params.tagEveryone)
+      return NextResponse.json({
+        type: InteractionResponseType.ChannelMessageWithSource,
+        data: { content: `Announcement Sent!` },
+      });
     }
   }
 
@@ -140,10 +91,6 @@ export async function POST(request: Request) {
     const embed = interaction.message.embeds[0];
 
     const success = (embed: APIEmbed) => {
-      setTimeout(() => {
-        revalidateTag("games")
-      }, 5000);
-
       return NextResponse.json({
         type: InteractionResponseType.UpdateMessage,
         data: { content: `<@${interaction.member?.user?.id}>`, embeds: [embed], components: [] },
@@ -156,32 +103,22 @@ export async function POST(request: Request) {
         embed.color = 5763719;
         embed.footer!.icon_url = "https://i.imgur.com/slN10y7.png";
         return success(embed);
+
       case ButtonId.ContactSpam:
         embed.footer!.text = `Marked as spam by ${interaction.member?.user?.global_name}`;
         embed.color = 15548997;
         embed.footer!.icon_url = "https://i.imgur.com/ouFkKRh.png";
         return success(embed);
+
       case ButtonId.GameApprove:
         embed.footer!.text = `Game approved by ${interaction.member?.user?.global_name}`;
         embed.color = 5763719;
         embed.footer!.icon_url = "https://i.imgur.com/slN10y7.png";
 
-        const data = { ...embed, spreadsheet: "addGames" };
-        try {
-          await fetch(process.env.SPREADSHEET_ENDPOINT_URL!, {
-            method: "POST",
-            headers: {
-              "Content-Type": "text/plain;charset=utf-8",
-            },
-            body: JSON.stringify(data),
-          });
-
-          return success(embed);
-
-        } catch (err) {
-          return new NextResponse("an error occurred", { status: 500 });
-        }
-
+        sendGameToSpreadsheet(interaction, embed);
+        return NextResponse.json({
+          type: InteractionResponseType.DeferredMessageUpdate,
+        });
 
       case ButtonId.GameDecline:
         embed.footer!.text = `Game declined by ${interaction.member?.user?.global_name}`;

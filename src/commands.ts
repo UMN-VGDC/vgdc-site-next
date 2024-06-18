@@ -5,58 +5,60 @@
  * @see https://discord.com/developers/docs/interactions/application-commands#registering-a-command
  */
 
-import { ApplicationCommandOptionType, ApplicationCommandType } from "discord-api-types/v10"
+import {
+  APIApplicationCommand,
+  ApplicationCommandOptionType,
+  ApplicationCommandType,
+  PermissionFlagsBits,
+} from "discord-api-types/v10";
 
 const PING_COMMAND = {
   name: "ping",
   description: "Ping pong! I'll respond with pong.",
-} as const
+} as APIApplicationCommand;
 
 const INVITE_COMMAND = {
   name: "invite",
   description: "Get an invite link to add this bot to your server",
-} as const
+} as APIApplicationCommand;
 
-const POKEMON_COMMAND = {
-  name: "pokemon",
-  description: "Get a preview of a Pokemon by name or Pokedex number",
-  options: [
-    {
-      name: "number",
-      description: "Enter Pokedex number",
-      min_value: 1,
-      type: ApplicationCommandOptionType.Integer,
-    },
-    {
-      name: "name",
-      description: "Enter Pokemon name",
-      type: ApplicationCommandOptionType.String,
-    },
-  ],
+export enum AnnouncementType {
+  Schedule = "Schedule",
+  Themes = "Themes",
+  GameJam = "Game Jam",
+  Event = "Event",
+  Other = "Other"
 }
 
-export type RandomPicType = "cat" | "dog" | "picsum"
-export const RANDOM_PIC_COMMAND = {
-  name: "randompic",
-  description: "Get a random picture",
+const ANNOUNCEMENT_COMMAND = {
+  name: "announcement",
+  description: "Make an announcement",
   options: [
     {
-      name: "type",
-      description: "What type of picture would you like?",
+      name: "category",
+      description: "What is this announcement about?",
       type: ApplicationCommandType.Message,
       required: true,
       choices: [
-        { name: "cat", value: "cat" },
-        { name: "dog", value: "dog" },
-        { name: "generic", value: "picsum" },
+        { name: AnnouncementType.Schedule, value: "schedule" },
+        { name: AnnouncementType.Themes, value: "themes" },
+        { name: AnnouncementType.GameJam, value: "game jam" },
+        { name: AnnouncementType.Event, value: "event" },
+        { name: AnnouncementType.Other, value: "other" },
       ],
     },
+    {
+      name: "tag-everyone",
+      description: "@everyone?",
+      required: true,
+      type: ApplicationCommandOptionType.Boolean,
+    },
   ],
-} as const
+  default_member_permissions: PermissionFlagsBits.Administrator.toString(),
+} as APIApplicationCommand;
 
 export const commands = {
   ping: PING_COMMAND,
   invite: INVITE_COMMAND,
-  pokemon: POKEMON_COMMAND,
-  randompic: RANDOM_PIC_COMMAND,
-} as const
+  announcement: ANNOUNCEMENT_COMMAND,
+} as const;

@@ -1,8 +1,10 @@
 import {
+  APIActionRowComponent,
   APIBaseInteraction,
   APIButtonComponentWithCustomId,
   APIChatInputApplicationCommandInteraction,
   APIPingInteraction,
+  APITextInputComponent,
   InteractionType,
 } from "discord-api-types/v10";
 import nacl from "tweetnacl";
@@ -29,7 +31,8 @@ type VerifyDiscordRequestResult =
       interaction:
         | APIPingInteraction
         | APIChatInputApplicationCommandInteraction
-        | APIBaseInteraction<InteractionType.MessageComponent, APIButtonComponentWithCustomId>;
+        | APIBaseInteraction<InteractionType.MessageComponent, APIButtonComponentWithCustomId>
+        | APIBaseInteraction<InteractionType.ModalSubmit, APIActionRowComponent<APITextInputComponent>>;
     };
 
 /**
@@ -57,7 +60,10 @@ export async function verifyInteractionRequest(
     interaction: JSON.parse(rawBody) as
       | APIPingInteraction
       | APIChatInputApplicationCommandInteraction
-      | APIBaseInteraction<InteractionType.MessageComponent, APIButtonComponentWithCustomId>,
+      | APIBaseInteraction<InteractionType.MessageComponent, APIButtonComponentWithCustomId>
+      | APIBaseInteraction<InteractionType.ModalSubmit, APIActionRowComponent<APITextInputComponent>>
+      ,
+      
     isValid: true,
   };
 }

@@ -4,7 +4,6 @@ import { ContactData } from "@/app/contact/FormWrapper";
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from "@discordjs/builders";
 import { REST } from "@discordjs/rest";
 import { ButtonStyle, Routes } from "discord-api-types/v10";
-import { NextResponse } from "next/server";
 import { ButtonId } from "./buttonId";
 
 const ReplyButton = new ButtonBuilder()
