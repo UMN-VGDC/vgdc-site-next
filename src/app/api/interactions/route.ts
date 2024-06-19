@@ -79,10 +79,10 @@ export async function POST(request: Request) {
     const params = JSON.parse(interaction.data.custom_id)
 
     if (params.type === "announcement") {
-      sendAnnouncement(interaction, params.category, params.tagEveryone)
+      const res = await sendAnnouncement(interaction, params.category, params.tagEveryone)
       return NextResponse.json({
         type: InteractionResponseType.ChannelMessageWithSource,
-        data: { content: `Announcement Sent!` },
+        data: { content: res.status === 200 ? `Announcement Sent!` : res.message },
       });
     }
   }

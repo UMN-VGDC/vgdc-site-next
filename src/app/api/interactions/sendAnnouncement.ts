@@ -68,8 +68,10 @@ export async function sendAnnouncement(interaction: any, category: string, tagEv
       },
       body: JSON.stringify(data),
     });
+    return { status: 200 };
   } catch (err) {
     console.error(err);
+    return { status: 500, message: err };
   }
 }
 
