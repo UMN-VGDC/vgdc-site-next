@@ -2,6 +2,7 @@ import { AnnouncementType } from "@/commands";
 import { EmbedBuilder } from "@discordjs/builders";
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v10";
+import { revalidateTag } from "next/cache";
 
 export async function sendAnnouncement(interaction: any, category: string, tagEveryone: boolean) {
   const title = interaction.data?.components[0].components[0].value;
@@ -11,6 +12,8 @@ export async function sendAnnouncement(interaction: any, category: string, tagEv
   const nickname = interaction.member.nick;
   const username = interaction.member.user.global_name;
   const type = toTitleCase(category);
+
+  revalidateTag("announcements");
 
   let color: number;
   //list of colors

@@ -5,7 +5,7 @@ export default async function FetchAnnouncements() {
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheet_id}/values/${tab_name}?alt=json&key=${api_key}`;
 
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, {next: {tags: ["announcements"]}});
     const result = await res.json();
     const { values } = result;
     return values
