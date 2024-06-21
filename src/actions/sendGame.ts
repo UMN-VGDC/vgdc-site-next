@@ -15,9 +15,9 @@ const DeclineButton = new ButtonBuilder()
   .setLabel("Decline")
   .setStyle(ButtonStyle.Danger);
 
-type GameFormData = {
+export type GameFormData = {
   title: string;
-  thumbnail: string;
+  "thumbnail image": string;
   "build link": string;
   description: string;
   credits: string;
@@ -29,10 +29,9 @@ type GameFormData = {
   "umn email": string;
 };
 
-export default async function sendGame(formData: FormData) {
+export default async function sendGame(data: GameFormData) {
   const rest = new REST({ version: "10" }).setToken(process.env.DISCORD_BOT_TOKEN!);
   const row = new ActionRowBuilder().addComponents(ApproveButton, DeclineButton);
-  const data = Object.fromEntries(formData) as GameFormData;
 
   function checkUndefined(e: any) {
     return e ? e : "---";
@@ -48,14 +47,14 @@ export default async function sendGame(formData: FormData) {
         { name: "Date", value: checkUndefined(data.date), inline: true },
         { name: "Credits", value: checkUndefined(data.credits) },
         { name: "Build Link", value: checkUndefined(data["build link"]) },
-        { name: "Thumbnail Image", value: checkUndefined(data.thumbnail) },
+        { name: "Thumbnail Image", value: checkUndefined(data["thumbnail image"]) },
         { name: "Media 1", value: checkUndefined(data.media0), inline: true },
         { name: "Media 2", value: checkUndefined(data.media1), inline: true },
         { name: "Media 3", value: checkUndefined(data.media2), inline: true },
         { name: "Contact", value: `${data["umn email"]}`, inline: true }
       )
       .setTimestamp()
-      .setImage(checkUndefined(data.thumbnail))
+      .setImage(checkUndefined(data["thumbnail image"]))
       .setFooter({ text: "Pending Approval", iconURL: "https://i.imgur.com/VIWSXf3.png" });
 
     await rest.post(Routes.channelMessages(process.env.DISCORD_OFFICER_CHANNEL_ID!), {

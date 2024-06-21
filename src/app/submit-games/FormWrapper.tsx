@@ -1,6 +1,6 @@
 "use client";
 
-import sendGame from "@/actions/sendGame";
+import sendGame, { GameFormData } from "@/actions/sendGame";
 import { useState } from "react";
 import styles from "../_components/form.module.scss";
 import FormFieldFile from "../_components/FormComponents";
@@ -40,8 +40,9 @@ export default function FormWrapper({ children }: { children: React.ReactNode })
       formData.set("media0", imageLinks[1])
       formData.set("media1", imageLinks[2])
       formData.set("media2", imageLinks[3])
-  
-      const response = await sendGame(formData);
+      const data = Object.fromEntries(formData) as GameFormData;
+      console.log(data)
+      const response = await sendGame(data);
       setSubmitStatus(response.status);
     } catch (err) {
       console.error(err)
