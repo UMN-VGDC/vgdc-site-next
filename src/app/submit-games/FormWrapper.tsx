@@ -25,7 +25,7 @@ export default function FormWrapper({ children }: { children: React.ReactNode })
 export function ThumbnailUpload() {
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) return;
-    if (e.target.files[0].size > 4194304) {
+    if (e.target.files[0].size > 2097152) {
       alert("File is too big!");
       e.target.value = "";
     }
@@ -34,7 +34,7 @@ export function ThumbnailUpload() {
   return (
     <FormFieldFile
       label="Thumbnail Image"
-      title="maximum 4 MB"
+      title="maximum 2 MB"
       accept="image/png, image/jpeg, image/jpg"
       isRequired
       changeEvent={handleImageUpload}

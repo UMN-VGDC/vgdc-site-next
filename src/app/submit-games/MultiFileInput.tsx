@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function MultiFileInput() {
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) return;
-    if (e.target.files[0].size > 4194304) {
+    if (e.target.files[0].size > 2097152) {
       alert("File is too big!");
       e.target.value = "";
     }
@@ -50,7 +50,7 @@ function AddBox({ mediaId, changeEvent, addCallback }: AddBox) {
             type="file"
             id={`media${mediaId}`}
             name={`media${mediaId}`}
-            title="maximum 4 MB"
+            title="maximum 2 MB"
             accept="image/png, image/jpeg"
             onChange={changeEvent}
           ></input>
