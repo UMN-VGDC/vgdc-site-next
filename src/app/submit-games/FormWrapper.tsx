@@ -41,7 +41,6 @@ export default function FormWrapper({ children }: { children: React.ReactNode })
       formData.set("media1", imageLinks[2])
       formData.set("media2", imageLinks[3])
       const data = Object.fromEntries(formData) as GameFormData;
-      console.log(data)
       const response = await sendGame(data);
       setSubmitStatus(response.status);
     } catch (err) {
