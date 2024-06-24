@@ -1,10 +1,24 @@
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import ContentfulData from "../_components/ContentfulData";
 import styles from "../_components/basicPage.module.scss";
 
+const query = `
+  {
+    aboutPage(id: "6gI50sekVnS2dEVzgl4001") {
+      about {
+        json
+      }
+    }
+  }
+`
+
 export default async function About() {
+  const data = (await ContentfulData(query, "about"))
+  const about = data.aboutPage.about;
+
   return (
     <main className={styles.basicPage}>
-      <ContentfulData contentType="aboutPage" />
+      {documentToReactComponents(about.json)}
     </main>
   );
 }

@@ -1,4 +1,4 @@
-main.basicPage {
+.basicPage {
   @media (min-width: 800px) {
     width: 800px;
     margin-top: 8em;
@@ -19,12 +19,20 @@ main.basicPage {
   h2 {
     margin-top: 1em;
     margin-bottom: 0.2em;
+    font-family: var(--font-exo);
+    font-weight: 700;
   }
 
   h1 {
     font-size: 3rem;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    margin-top: 2rem;
   }
 
   ul {
