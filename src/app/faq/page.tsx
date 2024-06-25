@@ -1,24 +1,11 @@
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import ContentfulData from "../_components/ContentfulData";
-import styles from "../_components/basicPage.module.scss";
+import { Suspense } from "react";
+import FAQ from "./FAQ";
+import Loading from "./loading";
 
-const query = `
-  {
-    faqPage(id: "urzWD7JIxtk2HqLJyQP3B") {
-      faq {
-        json
-      }
-    }
-  }
-`
-
-export default async function About() {
-  const data = (await ContentfulData(query, "faq"))
-  const faq = data.faqPage.faq;
-  
+export default async function Page() {
   return (
-    <main className={styles.basicPage}>
-      {documentToReactComponents(faq.json)}
-    </main>
+    <Suspense fallback={<Loading />}>
+      <FAQ />
+    </Suspense>
   );
 }

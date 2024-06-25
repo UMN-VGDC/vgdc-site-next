@@ -1,24 +1,11 @@
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import ContentfulData from "../_components/ContentfulData";
-import styles from "../_components/basicPage.module.scss";
+import { Suspense } from "react";
+import Loading from "./loading";
+import About from "./About";
 
-const query = `
-  {
-    aboutPage(id: "6gI50sekVnS2dEVzgl4001") {
-      about {
-        json
-      }
-    }
-  }
-`
-
-export default async function About() {
-  const data = (await ContentfulData(query, "about"))
-  const about = data.aboutPage.about;
-
+export default async function Page() {
   return (
-    <main className={styles.basicPage}>
-      {documentToReactComponents(about.json)}
-    </main>
+    <Suspense fallback={<Loading />}>
+      <About />
+    </Suspense>
   );
 }
