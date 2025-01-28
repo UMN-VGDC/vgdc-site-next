@@ -8,10 +8,6 @@ export default function Page() {
   return (
     <>
       <div className="relative h-screen min-w-full">
-        <video className={styles.homeIntro} poster="/videos/vgdcIntro.webp" autoPlay muted playsInline>
-          <source src="/videos/vgdcWebMTest.hevc.mp4" type="video/mp4; codecs='hvc1'" />
-          <source src="/videos/vgdcWebMTest.mkv" type="video/mp4" />
-        </video>
         <div>
           <video
             className={`${styles.homeVideoMobile} md:hidden`}
