@@ -13,7 +13,8 @@ const headerText: React.ReactNode[] = [
     DESIGN
   </>,
   <>
-    <Arrow color="#ff65f0" />P<span className="ml-[-3px] mr-[4px]">L</span>AY
+    <Arrow color="#ff65f0" />
+    <a href='/games'>P<span className="ml-[-3px] mr-[4px]">L</span>AY</a>
   </>,
 ]
 
