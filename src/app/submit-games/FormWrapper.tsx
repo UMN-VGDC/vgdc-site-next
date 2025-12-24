@@ -9,10 +9,13 @@ import SubmitButton from "../_components/SubmitButton";
 async function getImgurLink(image: File) {
   const arrayBuffer = await image.arrayBuffer();
   const buffer = new Uint8Array(arrayBuffer);
+  
+  console.log("DEBUG CHECK:", process.env.NEXT_PUBLIC_IMGUR_KEY);
+  
   const data = await fetch("https://api.imgur.com/3/image/", {
     method: "POST",
     headers: {
-      Authorization: `Client-ID ${process.env.IMGUR_KEY}`,
+      Authorization: `Client-ID ${process.env.NEXT_PUBLIC_IMGUR_KEY}`,
     },
     body: buffer,
   });
