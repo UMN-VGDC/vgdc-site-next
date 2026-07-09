@@ -36,7 +36,7 @@ const avenir = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "Video Game Development Club",
+  title: "UMN | Video Game Development Club",
   keywords:
     "video game, club, University of Minnesota, student group, student, game, Minnesota, UMN, UMN student group, UMN club, art, programming, coding, game development, game dev, dev",
   description:
